@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
 import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { Match } from "../types";
@@ -274,80 +275,147 @@ export function MatchCard({ match, onPress }: MatchCardProps) {
           {/* Score / Time Center */}
           <View style={{ alignItems: "center", paddingHorizontal: 12 }}>
             {hasScore ? (
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  backgroundColor: scoreBg,
-                  borderRadius: 14,
-                  paddingHorizontal: 16,
-                  paddingVertical: 8,
-                  borderWidth: 1,
-                  borderColor: borderColor,
-                }}
-              >
-                <Text
+              isLive ? (
+                <LinearGradient
+                  colors={["rgba(239,68,68,0.18)", "rgba(239,68,68,0.08)"]}
                   style={{
-                    fontSize: 26,
-                    fontWeight: "800",
-                    color:
-                      homeScore > awayScore
-                        ? "#22c55e"
-                        : homeScore < awayScore
-                        ? "#ef4444"
-                        : textPrimary,
-                    minWidth: 24,
-                    textAlign: "center",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    borderRadius: 14,
+                    paddingHorizontal: 16,
+                    paddingVertical: 8,
+                    borderWidth: 1,
+                    borderColor: "rgba(239,68,68,0.35)",
                   }}
                 >
-                  {match.intHomeScore}
-                </Text>
-                <Text
+                  <Text
+                    style={{
+                      fontSize: 26,
+                      fontWeight: "800",
+                      color: homeScore > awayScore ? "#ef4444" : homeScore < awayScore ? "#ef4444" : textPrimary,
+                      minWidth: 24,
+                      textAlign: "center",
+                    }}
+                  >
+                    {match.intHomeScore}
+                  </Text>
+                  <Text style={{ fontSize: 18, marginHorizontal: 8, color: "rgba(239,68,68,0.5)", fontWeight: "300" }}>
+                    :
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 26,
+                      fontWeight: "800",
+                      color: awayScore > homeScore ? "#ef4444" : awayScore < homeScore ? "#ef4444" : textPrimary,
+                      minWidth: 24,
+                      textAlign: "center",
+                    }}
+                  >
+                    {match.intAwayScore}
+                  </Text>
+                </LinearGradient>
+              ) : (
+                <View
                   style={{
-                    fontSize: 18,
-                    marginHorizontal: 8,
-                    color: textMuted,
-                    fontWeight: "300",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    backgroundColor: scoreBg,
+                    borderRadius: 14,
+                    paddingHorizontal: 16,
+                    paddingVertical: 8,
+                    borderWidth: 1,
+                    borderColor: borderColor,
                   }}
                 >
-                  :
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 26,
-                    fontWeight: "800",
-                    color:
-                      awayScore > homeScore
-                        ? "#22c55e"
-                        : awayScore < homeScore
-                        ? "#ef4444"
-                        : textPrimary,
-                    minWidth: 24,
-                    textAlign: "center",
-                  }}
-                >
-                  {match.intAwayScore}
-                </Text>
-              </View>
+                  <Text
+                    style={{
+                      fontSize: 26,
+                      fontWeight: "800",
+                      color:
+                        homeScore > awayScore
+                          ? "#22c55e"
+                          : homeScore < awayScore
+                          ? "#ef4444"
+                          : textPrimary,
+                      minWidth: 24,
+                      textAlign: "center",
+                    }}
+                  >
+                    {match.intHomeScore}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      marginHorizontal: 8,
+                      color: textMuted,
+                      fontWeight: "300",
+                    }}
+                  >
+                    :
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 26,
+                      fontWeight: "800",
+                      color:
+                        awayScore > homeScore
+                          ? "#22c55e"
+                          : awayScore < homeScore
+                          ? "#ef4444"
+                          : textPrimary,
+                      minWidth: 24,
+                      textAlign: "center",
+                    }}
+                  >
+                    {match.intAwayScore}
+                  </Text>
+                </View>
+              )
             ) : (
               <View style={{ alignItems: "center" }}>
                 <Text
                   style={{
-                    fontSize: 22,
-                    fontWeight: "800",
-                    color: "#22c55e",
-                    letterSpacing: 0.5,
+                    fontSize: 11,
+                    fontWeight: "900",
+                    color: textMuted,
+                    letterSpacing: 3,
+                    marginBottom: 6,
                   }}
                 >
-                  {formatMatchTime(match.strTime)}
+                  VS
                 </Text>
+                <View
+                  style={{
+                    backgroundColor: isDark
+                      ? "rgba(34,197,94,0.13)"
+                      : "rgba(34,197,94,0.1)",
+                    borderRadius: 12,
+                    paddingHorizontal: 12,
+                    paddingVertical: 6,
+                    borderWidth: 1,
+                    borderColor: isDark
+                      ? "rgba(34,197,94,0.28)"
+                      : "rgba(34,197,94,0.2)",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 19,
+                      fontWeight: "800",
+                      color: "#22c55e",
+                      letterSpacing: 0.5,
+                    }}
+                  >
+                    {formatMatchTime(match.strTime)}
+                  </Text>
+                </View>
                 <Text
                   style={{
                     fontSize: 9,
                     fontWeight: "700",
                     color: textMuted,
                     letterSpacing: 1.5,
-                    marginTop: 3,
+                    marginTop: 5,
                     textTransform: "uppercase",
                   }}
                 >

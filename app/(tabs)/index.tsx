@@ -81,26 +81,60 @@ export default function HomeScreen() {
         <LinearGradient
           colors={
             isDark
-              ? ["#0f2318", "#0f0f1a"]
-              : ["#f0fdf4", "#f8fafc"]
+              ? ["#071a0d", "#0e1f14", "#0f0f1a"]
+              : ["#dcfce7", "#f0fdf4", "#f8fafc"]
           }
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
           style={{
             marginHorizontal: 16,
             marginTop: 16,
-            borderRadius: 20,
-            padding: 20,
+            borderRadius: 24,
+            padding: 24,
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
             overflow: "hidden",
+            borderWidth: 1,
+            borderColor: isDark
+              ? "rgba(34,197,94,0.22)"
+              : "rgba(34,197,94,0.18)",
           }}
         >
+          {/* Decorative background circles */}
+          <View
+            style={{
+              position: "absolute",
+              right: -40,
+              top: -40,
+              width: 180,
+              height: 180,
+              borderRadius: 90,
+              backgroundColor: isDark
+                ? "rgba(34,197,94,0.04)"
+                : "rgba(34,197,94,0.05)",
+            }}
+          />
+          <View
+            style={{
+              position: "absolute",
+              right: 30,
+              bottom: -25,
+              width: 90,
+              height: 90,
+              borderRadius: 45,
+              backgroundColor: isDark
+                ? "rgba(34,197,94,0.05)"
+                : "rgba(34,197,94,0.06)",
+            }}
+          />
+
           <View style={{ flex: 1 }}>
             <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
-                marginBottom: 8,
+                marginBottom: 10,
               }}
             >
               <View
@@ -135,11 +169,11 @@ export default function HomeScreen() {
             </View>
             <Text
               style={{
-                fontSize: 22,
+                fontSize: 25,
                 fontWeight: "800",
                 color: textPrimary,
                 letterSpacing: -0.5,
-                lineHeight: 28,
+                lineHeight: 32,
               }}
             >
               Follow Your{"\n"}Favourite Teams
@@ -154,25 +188,111 @@ export default function HomeScreen() {
             >
               Scores, fixtures & standings
             </Text>
+
+            {/* Stats Pills */}
+            <View style={{ flexDirection: "row", gap: 8, marginTop: 14 }}>
+              <View
+                style={{
+                  backgroundColor: isDark
+                    ? "rgba(34,197,94,0.13)"
+                    : "rgba(34,197,94,0.1)",
+                  borderRadius: 20,
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  borderWidth: 1,
+                  borderColor: isDark
+                    ? "rgba(34,197,94,0.2)"
+                    : "rgba(34,197,94,0.15)",
+                }}
+              >
+                <Ionicons
+                  name="trophy-outline"
+                  size={10}
+                  color="#22c55e"
+                  style={{ marginRight: 4 }}
+                />
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontWeight: "700",
+                    color: "#22c55e",
+                  }}
+                >
+                  {leagues?.length || 0} Leagues
+                </Text>
+              </View>
+              <View
+                style={{
+                  backgroundColor: isDark
+                    ? "rgba(34,197,94,0.13)"
+                    : "rgba(34,197,94,0.1)",
+                  borderRadius: 20,
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  borderWidth: 1,
+                  borderColor: isDark
+                    ? "rgba(34,197,94,0.2)"
+                    : "rgba(34,197,94,0.15)",
+                }}
+              >
+                <Ionicons
+                  name="time-outline"
+                  size={10}
+                  color="#22c55e"
+                  style={{ marginRight: 4 }}
+                />
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontWeight: "700",
+                    color: "#22c55e",
+                  }}
+                >
+                  {matches?.length || 0} Fixtures
+                </Text>
+              </View>
+            </View>
           </View>
 
+          {/* Football icon - double ring */}
           <View
             style={{
-              width: 90,
-              height: 90,
-              borderRadius: 45,
+              width: 100,
+              height: 100,
+              borderRadius: 50,
               backgroundColor: isDark
-                ? "rgba(34,197,94,0.12)"
-                : "rgba(34,197,94,0.08)",
+                ? "rgba(34,197,94,0.05)"
+                : "rgba(34,197,94,0.04)",
               alignItems: "center",
               justifyContent: "center",
-              borderWidth: 2,
+              borderWidth: 1,
               borderColor: isDark
-                ? "rgba(34,197,94,0.25)"
-                : "rgba(34,197,94,0.2)",
+                ? "rgba(34,197,94,0.12)"
+                : "rgba(34,197,94,0.1)",
             }}
           >
-            <Ionicons name="football" size={44} color="#22c55e" />
+            <View
+              style={{
+                width: 76,
+                height: 76,
+                borderRadius: 38,
+                backgroundColor: isDark
+                  ? "rgba(34,197,94,0.12)"
+                  : "rgba(34,197,94,0.09)",
+                alignItems: "center",
+                justifyContent: "center",
+                borderWidth: 1.5,
+                borderColor: isDark
+                  ? "rgba(34,197,94,0.32)"
+                  : "rgba(34,197,94,0.25)",
+              }}
+            >
+              <Ionicons name="football" size={40} color="#22c55e" />
+            </View>
           </View>
         </LinearGradient>
 
@@ -207,6 +327,29 @@ export default function HomeScreen() {
               >
                 Popular Leagues
               </Text>
+              {leagues && leagues.length > 0 && (
+                <View
+                  style={{
+                    backgroundColor: isDark
+                      ? "rgba(34,197,94,0.15)"
+                      : "rgba(34,197,94,0.1)",
+                    borderRadius: 10,
+                    paddingHorizontal: 7,
+                    paddingVertical: 2,
+                    marginLeft: 8,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 11,
+                      fontWeight: "800",
+                      color: "#22c55e",
+                    }}
+                  >
+                    {leagues.length}
+                  </Text>
+                </View>
+              )}
             </View>
           </View>
 
@@ -284,6 +427,29 @@ export default function HomeScreen() {
               >
                 Upcoming Matches
               </Text>
+              {matches && matches.length > 0 && (
+                <View
+                  style={{
+                    backgroundColor: isDark
+                      ? "rgba(34,197,94,0.15)"
+                      : "rgba(34,197,94,0.1)",
+                    borderRadius: 10,
+                    paddingHorizontal: 7,
+                    paddingVertical: 2,
+                    marginLeft: 8,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 11,
+                      fontWeight: "800",
+                      color: "#22c55e",
+                    }}
+                  >
+                    {Math.min(matches.length, APP_CONFIG.MAX_UPCOMING_MATCHES)}
+                  </Text>
+                </View>
+              )}
             </View>
 
             <View
@@ -299,7 +465,7 @@ export default function HomeScreen() {
               }}
             >
               <Ionicons
-                name="refresh"
+                name="arrow-down-outline"
                 size={11}
                 color="#22c55e"
                 style={{ marginRight: 4 }}
@@ -312,7 +478,7 @@ export default function HomeScreen() {
                   letterSpacing: 0.3,
                 }}
               >
-                Pull to refresh
+                Refresh
               </Text>
             </View>
           </View>

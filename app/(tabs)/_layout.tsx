@@ -26,6 +26,17 @@ function TabIcon({ label, focused, icon, iconFocused, isDark }: TabIconProps) {
         paddingTop: 4,
       }}
     >
+      {/* Active indicator line at top */}
+      <View
+        style={{
+          position: "absolute",
+          top: 0,
+          width: focused ? 24 : 0,
+          height: 3,
+          borderRadius: 1.5,
+          backgroundColor: "#22c55e",
+        }}
+      />
       <View
         style={{
           width: 44,
